@@ -1,5 +1,5 @@
 
-# S3-Exporter
+# S3-Cat
 
 
   Streams file contents from S3 using a knox client.
@@ -11,18 +11,18 @@
   ```javascript
   // Pipe all of our logs to the terminal
 
-  var auth       = require('./auth.json')
-    , knox       = require('knox')
-    , S3Lister   = require('s3-lister')
-    , S3Exporter = require('s3-exporter');
+  var auth      = require('./auth.json')
+    , knox      = require('knox')
+    , S3Lister  = require('s3-lister')
+    , S3Cat     = require('s3-cat');
 
   var client = knox.createClient(auth);
 
-  var lister   = new S3Lister(client, { prefix : 'my_cool_dir' })
-    , exporter = new S3Exporter(client);
+  var lister = new S3Lister(client, { prefix : 'my_cool_dir' })
+    , s3cat  = new S3Cat(client);
 
   lister
-    .pipe(exporter)
+    .pipe(s3cat)
     .pipe(process.stdout);
   ```
 

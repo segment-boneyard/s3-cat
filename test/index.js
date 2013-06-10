@@ -1,9 +1,9 @@
 
-var assert     = require('assert')
-  , auth       = require('./auth.json')
-  , knox       = require('knox')
-  , S3Lister   = require('s3-lister')
-  , S3Exporter = require('..');
+var assert    = require('assert')
+  , auth      = require('./auth.json')
+  , knox      = require('knox')
+  , S3Lister  = require('s3-lister')
+  , S3Cat     = require('..');
 
 
 var client = knox.createClient(auth);
@@ -19,10 +19,10 @@ var once = function (count, fn) {
 };
 
 
-describe('S3Exporter', function () {
+describe('S3Cat', function () {
 
   var files  = 3
-    , folder = '_s3-exporter-test';
+    , folder = '_s3-cat-test';
 
   before(function (done) {
     done = once(files, done);
@@ -37,11 +37,11 @@ describe('S3Exporter', function () {
   it('should list the full file contents', function (done) {
     this.timeout(10000);
 
-    var lister   = new S3Lister(client, { prefix : folder })
-      , exporter = new S3Exporter(client)
-      , output   = '';
+    var lister = new S3Lister(client, { prefix : folder })
+      , cat    = new S3Cat(client)
+      , output = '';
 
-    lister.pipe(exporter)
+    lister.pipe(cat)
       .on('data', function (data) { output += data; })
       .on('end',  function () { assert(output === '012'); done(); });
   });

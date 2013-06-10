@@ -1,12 +1,12 @@
 {
-  "name": "s3-exporter",
+  "name": "s3-cat",
   "version": "0.0.1",
   "description": "Streams file contents from s3",
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha"
   },
-  "repository": "https://github.com/segmentio/s3-exporter.git",
+  "repository": "https://github.com/segmentio/s3-cat.git",
   "author": "Segment.io <friends@segment.io>",
   "license": "MIT",
   "dependencies": {
